@@ -1,4 +1,5 @@
-﻿using ProjektowanieSystemow;
+﻿using System.Diagnostics;
+using ProjektowanieSystemow;
 //------------Invoke program-------------//
 for (;;)
 {
@@ -9,6 +10,10 @@ for (;;)
 
 void calculation(Matrix matrixA)
 {
+    //Timer
+    Stopwatch sw = new Stopwatch();
+    sw.Restart();
+    sw.Start();
     int n = matrixA._matrix.Count();
     //Initial matrix for calculation
     var matrixU = new Matrix(n, "matrixU" );
@@ -32,10 +37,19 @@ void calculation(Matrix matrixA)
         {
             for (int k = i + 1; k < n; k++)
             {
-                matrixA._matrix[j][k] -= matrixL._matrix[j][i] * matrixA._matrix[i][k];
+                matrixA._matrix[j][k] = matrixA._matrix[j][k] - (matrixL._matrix[j][i] * matrixA._matrix[i][k]);
             }
         }
     }
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+            if(i <= j) matrixU._matrix[i][j] = matrixA._matrix[i][j];
+            else matrixU._matrix[i][j] = 0;
+        }
+    }
+    sw.Stop();
 
     Console.WriteLine("\n====End of Calculation====");
     matrixA.printMatrix();
@@ -43,6 +57,7 @@ void calculation(Matrix matrixA)
     
     matrixU.printMatrix();
     matrixL.printMatrix();
+    Console.WriteLine("Time Elapsed: " + sw.Elapsed);
     Console.ReadKey();
 }
 //----------------Extra Functions----------------------//
@@ -60,8 +75,8 @@ void startMenu()
         
         switch (userChoice)
         {
-            case '1': 
-                Console.WriteLine("Enter the number:");
+            case '1':
+                  Console.WriteLine("Enter the number:");
                 int n =  int.Parse(Console.ReadLine());
                 var matrix = new Matrix(n, "matrixA");
                 matrix.insertingVariablesToMatrix();

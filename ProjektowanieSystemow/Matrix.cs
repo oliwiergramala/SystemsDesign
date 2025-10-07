@@ -4,7 +4,6 @@ public class Matrix
     //Variables of Matrix
     public List<List<float>> _matrix;
     public string _name;
-    
     //Creat Matrix with zero's
     public Matrix(int n, string name)
     {
@@ -66,12 +65,26 @@ public class Matrix
     //Display matrix
     public void printMatrix()
     {
+        //arranged dispaly
+        var tempMaxCellLenght = 0;
+        var tempCellLenght = 0;
         Console.WriteLine($"\n{_name} :");
+
         foreach (var row in this._matrix)
         {
             foreach (var cel in row)
             {
-                Console.Write(cel + " ");
+                if (Math.Round(cel, 1).ToString().Length > tempMaxCellLenght) tempMaxCellLenght = Math.Round(cel, 1).ToString().Length;
+            }
+        }
+
+        foreach (var row in this._matrix)
+        {
+            foreach (var cel in row)
+            {
+                tempCellLenght = Math.Round(cel, 1).ToString().Length;
+                for (int i = 0; i < tempMaxCellLenght - tempCellLenght; i++) Console.Write(" ");
+                Console.Write((float)Math.Round(cel, 1) + " ");
             }
             Console.WriteLine();
         }
