@@ -16,17 +16,26 @@ public class Matrix
     //Init matrix
     public List<List<float>> initialMatrix(int n)
     {
-        for (int i = 0; i < n; i++)
+        if(n > 1)
         {
-            List<float> row = new List<float>();
-            for (int j = 0; j < n; j++)
+            for (int i = 0; i < n; i++)
             {
-                row.Add(0);
+                List<float> row = new List<float>();
+                for (int j = 0; j < n; j++)
+                {
+                    row.Add(0);
+                }
+                _matrix.Add(row);
             }
-            _matrix.Add(row);
+            printMatrix();
+            return _matrix;
         }
-        printMatrix();
-        return _matrix;
+        else
+        {
+            Console.WriteLine("Matrix size must be greater than 1.");
+            return null;
+        }
+
     }
     //Change Matrix from file
     public void changeMatrix(string filePath)

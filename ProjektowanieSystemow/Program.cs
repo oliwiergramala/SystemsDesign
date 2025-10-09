@@ -58,7 +58,6 @@ void calculation(Matrix matrixA)
     matrixU.printMatrix();
     matrixL.printMatrix();
     Console.WriteLine("Time Elapsed: " + sw.Elapsed);
-    Console.ReadKey();
 }
 //----------------Extra Functions----------------------//
 //Start menu of program
@@ -95,5 +94,8 @@ void startMenu()
     {
         Console.WriteLine("Error: " + e.Message);
     }
+    Console.WriteLine("\n=========================");
+    Console.WriteLine("Press any key to continue...");
+    Console.ReadKey();
 }
 
